@@ -1,5 +1,6 @@
 package com.gestionCafeteria.servicios;
 
+import com.gestionCafeteria.modelo.Cliente;
 import com.gestionCafeteria.modelo.Mesa;
 import com.gestionCafeteria.modelo.Reserva;
 
@@ -11,7 +12,24 @@ public class GestionReserva {
     private static Mesa[] listaDeMesas = new Mesa[15]; // No agrego ni quito mesas, por eso uso array.
 
     //Agregar reservas
+    private static ArrayList<Reserva> reservasRegistradas;
+
+    private static void agregarReserva(Reserva nuevaReserva) {
+        reservasRegistradas.add(nuevaReserva);
+        System.out.println(String.format("Reserva agregada correctamente: %s", nuevaReserva));
+    }
     //Eliminar reservas
+    private static Reserva buscarReserva(String idReserva) {
+        // Implementar
+        return null;
+    }
+
+
+    private static void eliminarReserva(String idReserva) {
+        Reserva reservaAEliminar = buscarReserva(idReserva);
+        reservasRegistradas.remove(reservaAEliminar);
+    }
+
     //Modificar reserva
     //Listar
 

@@ -44,4 +44,9 @@ public abstract class Persona {
     public void setDni(int dni) {
         this.dni = dni;
     }
+
+    @Override
+    public String toString() {
+        return String.format("%d, %s, %s, %s", this.dni, this.nombre, this.apellido, this.email);
+    }
 }
