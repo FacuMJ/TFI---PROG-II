@@ -2,22 +2,22 @@ package com.cafeteria.modelo;
 
 public class Cliente {
     //Los atributos
-    private String DNI;
+    private int dni;
     private String nombre;
     private String telefono;
     private String email;
 
     // El constructor
-    public Cliente(String DNI, String nombre, String telefono) {
-        this.DNI = DNI;
+    public Cliente(int dni, String nombre, String telefono, String email) {
+        this.dni = dni;
         this.nombre = nombre;
         this.telefono = telefono;
-        this.email = "";
+        this.email = email;
     }
 
     // Los getters
-    public String getDNI() {
-        return DNI;
+    public int getDni() {
+        return dni;
     }
     public String getNombre() {
         return nombre;
@@ -30,8 +30,8 @@ public class Cliente {
     }
 
     //Los Setters
-    public void setDNI(String id) {
-        this.DNI = id;
+    public void setDni(int dni) {
+        this.dni = dni;
     }
     public void setNombre(String nombre) {
         this.nombre = nombre;
@@ -45,6 +45,6 @@ public class Cliente {
 
     @Override
     public String toString() {
-        return nombre + " (" + telefono + ")";
+        return dni + ", " + nombre + " (" + telefono + ")" + " (" + email + ")";
     }
 }

@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Reserva {
     // Los atributos
-    private String DNI;
+    private String id;
     private Cliente cliente;
     private Mesa mesa;
     private Date fechaReserva;
@@ -13,8 +13,8 @@ public class Reserva {
     private String notas;
 
     // El constructor
-    public Reserva(String DNI, Cliente cliente, Mesa mesa, Date fechaReserva, int cantidadPersonas) {
-        this.DNI = DNI;
+    public Reserva(String id, Cliente cliente, Mesa mesa, Date fechaReserva, int cantidadPersonas) {
+        this.id = id;
         this.cliente = cliente;
         this.mesa = mesa;
         this.fechaReserva = fechaReserva;
@@ -24,8 +24,8 @@ public class Reserva {
     }
 
     // Los getters
-    public String getDNI() {
-        return DNI;
+    public String getId() {
+        return id;
     }
     public Cliente getCliente() {
         return cliente;
@@ -47,8 +47,8 @@ public class Reserva {
     }
 
     // Los setters
-    public void setDNI(String DNI) {
-        this.DNI = DNI;
+    public void setId(String id) {
+        this.id = id;
     }
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
@@ -73,25 +73,25 @@ public class Reserva {
 
     // Métodos especiales
     public void confirmarReserva() {
-        this.estado = "CONFIRMADA";
-        System.out.println(" Reserva " + DNI + " confirmada");
+        setEstado("CONFIRMADA");
+        System.out.println(" Reserva " + this.id + " confirmada");
     }
 
     public void cancelarReserva() {
-        this.estado = "CANCELADA";
-        System.out.println("Reserva " + DNI + " cancelada");
+        setEstado("CANCELADA");
+        System.out.println("Reserva " + this.id + " cancelada");
     }
 
     public boolean estaConfirmada() {
-        return "CONFIRMADA".equals(this.estado);
+        return "CONFIRMADA".equalsIgnoreCase(this.estado);
     }
 
     public boolean puedeCancelarse() {
-        return "PENDIENTE".equals(this.estado) || "CONFIRMADA".equals(this.estado);
+        return "PENDIENTE".equalsIgnoreCase(this.estado) || "CONFIRMADA".equalsIgnoreCase(this.estado);
     }
 
     @Override
     public String toString() {
-        return "Reserva #" + DNI + " - " + cliente.getNombre() + " - Mesa " + mesa.getNumero() + " - " + estado;
+        return "Reserva #" + id + " - " + cliente.getNombre() + " - Mesa " + mesa.getNumero() + " - " + estado;
     }
 }
