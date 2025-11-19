@@ -16,4 +16,9 @@ public class Cliente extends Persona {
     public void setPuntos(int puntos) {
         this.puntos = puntos;
     }
+
+    @Override
+    public String toString() {
+        return super.toString() + ", Puntos: " + this.puntos;
+    }
 }
