@@ -1,4 +1,4 @@
-
+package src.Modelo;
 
 public class Producto {
 
@@ -44,10 +44,5 @@ public class Producto {
             "\n precio= " + precio + 
             "\n categoria= " + categoria;
     }
-
-
-
-
-
 
 }
