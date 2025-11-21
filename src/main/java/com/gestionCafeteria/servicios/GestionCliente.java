@@ -21,7 +21,7 @@ public class GestionCliente {
     public static Cliente buscarCliente(int dniCliente) {
         for (Cliente cliente : clientesRegistrados) {
             if (cliente.getDni() == dniCliente) {
-                System.out.println(String.format("Cliente con DNI: %d encontrado!\n%s", dniCliente, cliente));
+                System.out.println(String.format("Cliente con DNI: %d encontrado!", dniCliente));
                 return cliente;
             }
         }
@@ -41,16 +41,33 @@ public class GestionCliente {
         System.out.println("Lista de clientes registrados:");
         clientesRegistrados.stream().forEach(System.out::println);
     }
-
-    public static void modificarCliente(int dniCliente) {
         //Busco cliente
         //Lo muestro
         //Pregunto que atributo quiere modificar
         //Pido el nuevo valor para ese atributo
         //hago la modificacion con cliente.set
+
+        public static void modificarCliente(int dniCliente, int opcionModificar, String nuevoValor) {
+            // Busco cliente
+            Cliente cliente = buscarCliente(dniCliente);
+            if (cliente == null) {
+                return;
+            }
+            // Lo muestro
+            switch (opcionModificar) {
+                case 1:
+                    cliente.setNombre(nuevoValor);
+                    break;
+                case 2:
+                    cliente.setApellido(nuevoValor);
+                    break;
+                case 3:
+                    cliente.setEmail(nuevoValor);
+                    break;
+            }
+        }
     }
 
 
 
 
-}
