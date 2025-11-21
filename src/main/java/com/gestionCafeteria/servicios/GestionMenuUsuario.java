@@ -98,21 +98,18 @@ public class GestionMenuUsuario {
                     mostrarMenuCliente();
                     break;
                 case 2:
-                    //Menu reserva
-                    break;
-                case 3:
                     //Menu producto
                     break;
-                case 4:
+                case 3:
                     System.out.println("Hasta luego!");
                     break;
                 default:
-                    System.out.println("Error: Opcion invalida. Por favor ingrese un valor numerico (1, 2, 3 o 4)");
+                    System.out.println("Error: Opcion invalida. Por favor ingrese un valor numerico (1, 2, o 3)");
                     mostrarMenuPrincipal();
             }
 
         } catch (InputMismatchException e) {
-            System.out.println("Error: Opcion invalida. Por favor ingrese un valor numerico (1, 2, 3 o 4)");
+            System.out.println("Error: Opcion invalida. Por favor ingrese un valor numerico (1, 2 o 3");
             scanner.nextLine();
             mostrarMenuPrincipal();
         }
