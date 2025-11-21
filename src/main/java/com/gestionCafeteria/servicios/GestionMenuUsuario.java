@@ -169,8 +169,8 @@ public class GestionMenuUsuario {
                             return;
                     }
                     GestionCliente.modificarCliente(dni,opcionModificar,nuevoValor);
-                    clienteAModificar = GestionCliente.buscarCliente(dni);
-                    System.out.println(String.format("\n=== CLIENTE CON DATOS ACTUALIZADOS ===\n%s", clienteAModificar));
+                    clienteAModificar =  GestionCliente.buscarCliente(dni);
+                    System.out.println(String.format("\n==== CLIENTE CON DATOS ACTUALIZADOS ====\n%s", clienteAModificar));
                     break;
                 case 3:
                     //Eliminar

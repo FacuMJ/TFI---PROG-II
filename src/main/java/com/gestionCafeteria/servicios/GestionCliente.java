@@ -45,7 +45,7 @@ public class GestionCliente {
         //Lo muestro
         //Pregunto que atributo quiere modificar
         //Pido el nuevo valor para ese atributo
-        //hago la modificacion con cliente.set
+        //hago la modificacionn con cliente.set
 
         public static void modificarCliente(int dniCliente, int opcionModificar, String nuevoValor) {
             // Busco cliente
