@@ -1,5 +1,7 @@
 package src.Modelo;
 
+import java.util.Objects;
+
 public class Producto {
 
     private int id;
@@ -7,7 +9,7 @@ public class Producto {
     private double precio;
     private String categoria;
 
-    public Producto(){}
+    public Producto() {}
 
     public Producto(int id, String nombre, double precio, String categoria) {
         this.id = id;
@@ -37,12 +39,28 @@ public class Producto {
         this.precio = precio;
     }
 
-    @Override
-    public String toString() {
-        return "Producto: " + nombre +  
-            "\n id= " + id  + 
-            "\n precio= " + precio + 
-            "\n categoria= " + categoria;
+    public String getCategoria() {
+        return categoria;
+    }
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 
+    @Override
+    public String toString() {
+        return "ID: "+ id +" | "+ nombre +" | $" + precio +" | " + categoria;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Producto producto = (Producto) o;
+        return id == producto.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }
