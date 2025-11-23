@@ -1,37 +1,40 @@
 package src.Modelo;
-import java.sql.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Venta {
 
     private int id;
-    private Date fecha;
+    private LocalDateTime fecha;
     private List<DetalleVenta> detalles;
-    private double total;
 
     public Venta(int id) {
         this.id = id;
-        this.fecha = new Date(System.currentTimeMillis());
+        this.fecha = LocalDateTime.now();
         this.detalles = new ArrayList<>();
-        this.total = 0.0;
     }
 
     public void agregarDetalle(DetalleVenta detalle) {
+        if (detalle == null) throw new IllegalArgumentException("Detalle no puede ser null");
         detalles.add(detalle);
-        total += detalle.getSubtotal();
     }
 
     public int getId() {
         return id;
     }
 
-    public Date getFecha() {
+    public LocalDateTime getFecha() {
         return fecha;
-    }   
+    }
 
     public double getTotal() {
-        return total;
+        double suma = 0.0;
+        for (DetalleVenta d : detalles) {
+            suma += d.getSubtotal();
+        }
+        return suma;
     }
 
     public List<DetalleVenta> getDetalles() {
@@ -42,14 +45,12 @@ public class Venta {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Venta ID: ").append(id)
-          .append("\nFecha: ").append(fecha)
-          .append("\nTotal: ").append(total)
+          .append("\nFecha: ").append(fecha.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")))
           .append("\nDetalles:\n");
         for (DetalleVenta detalle : detalles) {
-            sb.append(detalle).append("\n");
+            sb.append(" - ").append(detalle).append("\n");
         }
+        sb.append("\nTotal: $").append(getTotal());
         return sb.toString();
     }
-    
-
 }
