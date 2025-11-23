@@ -24,6 +24,9 @@ public class GestionVentas {
     }
 
     public void agregarProductoAVenta(Venta venta, Producto p, int cantidad) {
+        if (venta == null || p == null) {
+            throw new IllegalArgumentException("venta o producto nulos");
+        }
         DetalleVenta detalle = new DetalleVenta(p, cantidad);
         venta.agregarDetalle(detalle);
     }
