@@ -1,44 +1,61 @@
 package src.Servicios;
 
 import src.Modelo.Producto;
+
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class GestionProductos {
 
-    private List<Producto> productos;
+    // map mantiene orden de inserción y evita duplicados por id
+    private Map<Integer, Producto> productosById;
 
     public GestionProductos() {
-        this.productos = new ArrayList<>();
+        this.productosById = new LinkedHashMap<>();
         inicializarProductosBase();
     }
 
-    /**
-     * Agrega automáticamente algunos productos predeterminados al iniciar.
-     */
     private void inicializarProductosBase() {
         agregarProducto(new Producto(1, "Café", 750.0, "Bebida"));
-        agregarProducto(new Producto(2, "Sanbuchito", 1800.0, "Comida"));
+        agregarProducto(new Producto(2, "Sandwich", 1800.0, "Comida"));
         agregarProducto(new Producto(3, "Agua", 500.0, "Bebida"));
-        agregarProducto(new Producto(4, "Medialuna", 600.0, "Panadería"));
+        agregarProducto(new Producto(4, "Medialuna", 600.0, "Comida"));
     }
 
-    public void agregarProducto(Producto p) {
-        productos.add(p);
+    // devuelve true si se agregó, false si ya existía un producto con ese id
+    public boolean agregarProducto(Producto p) {
+        if (p == null) return false;
+        if (productosById.containsKey(p.getId())) return false;
+        productosById.put(p.getId(), p);
+        return true;
     }
 
-    public Producto buscarPorId(int id) {
-        for (Producto p : productos) {
-            if (p.getId() == id) return p;
-        }
-        return null;
+    public Producto buscarProducto(int id) {
+        return productosById.get(id);
     }
 
     public List<Producto> listarProductos() {
-        return productos;
+        return new ArrayList<>(productosById.values());
     }
 
-    public boolean eliminarProducto(int id) {
-        return productos.removeIf(p -> p.getId() == id);
+    public void eliminarProducto(int id) {
+        Producto p = buscarProducto(id);
+        if (p != null) {
+            productosById.remove(id);
+            System.out.println("Producto eliminado: " + p);
+        }
     }
+
+    public void modificarProducto(int id, String nuevoNombre, double nuevoPrecio, String nuevaCategoria) {
+        Producto p = buscarProducto(id);
+        if (p != null) {
+            p.setNombre(nuevoNombre);
+            p.setPrecio(nuevoPrecio);
+            p.setCategoria(nuevaCategoria);
+            System.out.println("Producto modificado: " + nuevoNombre);
+        }
+    }
+
 }
