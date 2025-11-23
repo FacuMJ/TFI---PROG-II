@@ -19,8 +19,8 @@ public class Main {
         while (opcion != 0) {
             System.out.println("\n=========== CAFETERÍA ===========");
             System.out.println("1. Gestionar productos");
-            System.out.println("5. Hacer venta");
-            System.out.println("6. Listar ventas");
+            System.out.println("2. Hacer venta");
+            System.out.println("3. Listar ventas");
             System.out.println("0. Salir");
             System.out.print("Elegir opción: ");
 
@@ -126,7 +126,7 @@ public class Main {
                             }
                     } 
                     break;
-                case 5:
+                case 2:
                     System.out.println("\n--- Hacer venta ---");
 
                     Venta venta = gestionVentas.crearVenta();
@@ -181,7 +181,7 @@ public class Main {
                     System.out.println(venta);
                     break;
 
-                case 6:
+                case 3:
                     System.out.println("\n--- Lista de ventas ---");
                     for (Venta v : gestionVentas.listarVentas()) {
                         System.out.println(v);
