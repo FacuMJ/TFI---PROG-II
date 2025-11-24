@@ -52,7 +52,12 @@ public class GestionMenuUsuario {
             "\t4. Buscar Cliente\n" +
             "\t5. Atras\n" +
             "=========================================================\n";
-
+    private static String textoModificarCliente = "\n=== MODIFICAR CLIENTE === \n"+
+                                                  "\t¿Que desea modificar?\n"+
+                                                  "\t1- Nombre\n"+
+                                                  "\t2- Apellido\n"+
+                                                  "\t3- Email\n"+
+                                                  "\t Seleccione una opción (1-3): \n";
 
     public static void mostrarMenuInicioSesion() {
         System.out.println(textoInicioSesion);
@@ -93,21 +98,18 @@ public class GestionMenuUsuario {
                     mostrarMenuCliente();
                     break;
                 case 2:
-                    //Menu reserva
-                    break;
-                case 3:
                     //Menu producto
                     break;
-                case 4:
+                case 3:
                     System.out.println("Hasta luego!");
                     break;
                 default:
-                    System.out.println("Error: Opcion invalida. Por favor ingrese un valor numerico (1, 2, 3 o 4)");
+                    System.out.println("Error: Opcion invalida. Por favor ingrese un valor numerico (1, 2, o 3)");
                     mostrarMenuPrincipal();
             }
 
         } catch (InputMismatchException e) {
-            System.out.println("Error: Opcion invalida. Por favor ingrese un valor numerico (1, 2, 3 o 4)");
+            System.out.println("Error: Opcion invalida. Por favor ingrese un valor numerico (1, 2 o 3");
             scanner.nextLine();
             mostrarMenuPrincipal();
         }
@@ -137,6 +139,35 @@ public class GestionMenuUsuario {
                     break;
                 case 2:
                     //Modificar
+                    System.out.println("Ingrese el DNI del cliente a modificar");
+                    dni = scanner.nextInt();
+                    scanner.nextLine();
+                    Cliente clienteAModificar = GestionCliente.buscarCliente(dni);
+                    System.out.println(String.format(" ===DATOS ACTUALES DEL CLIENTE ===\n%s", clienteAModificar));
+                    System.out.println(textoModificarCliente);
+                    int opcionModificar = scanner.nextInt();
+                    scanner.nextLine();
+                    String nuevoValor;
+                    switch (opcionModificar) {
+                        case 1:
+                            System.out.print("Ingrese nuevo nombre: ");
+                            nuevoValor = scanner.nextLine();
+                            break;
+                        case 2:
+                            System.out.print("Ingrese nuevo apellido: ");
+                            nuevoValor = scanner.nextLine();
+                            break;
+                        case 3:
+                            System.out.print("Ingrese nuevo email: ");
+                            nuevoValor = scanner.nextLine();
+                            break;
+                        default:
+                            System.out.println("ERROR: Opción inválida, por favor, elija una opcion entre 1 a 3");
+                            return;
+                    }
+                    GestionCliente.modificarCliente(dni,opcionModificar,nuevoValor);
+                    clienteAModificar =  GestionCliente.buscarCliente(dni);
+                    System.out.println(String.format("\n==== CLIENTE CON DATOS ACTUALIZADOS ====\n%s", clienteAModificar));
                     break;
                 case 3:
                     //Eliminar
