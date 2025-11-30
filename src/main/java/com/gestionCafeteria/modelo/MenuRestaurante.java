@@ -1,6 +1,6 @@
-package src.Modelo;
+package com.gestionCafeteria.modelo;
 
-import src.Servicios.GestionProductos;
+import com.gestionCafeteria.servicios.GestionProductos;
 import java.util.List;
 
 public class MenuRestaurante {

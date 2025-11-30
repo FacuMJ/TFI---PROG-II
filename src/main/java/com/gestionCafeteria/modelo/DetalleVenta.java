@@ -1,4 +1,4 @@
-package src.Modelo;
+package com.gestionCafeteria.modelo;
 
 public class DetalleVenta {
 

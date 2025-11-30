@@ -1,4 +1,4 @@
-package src.Modelo;
+package com.gestionCafeteria.modelo;
 
 import java.util.Objects;
 

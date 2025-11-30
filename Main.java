@@ -16,6 +16,8 @@ public class Main {
 
         int opcion = -1;
 
+
+        
         while (opcion != 0) {
             System.out.println("\n=========== CAFETERÍA ===========");
             System.out.println("1. Gestionar productos");
