@@ -23,7 +23,6 @@ import com.gestionCafeteria.modelo.Producto;
 import com.gestionCafeteria.modelo.Venta;
 import com.gestionCafeteria.modelo.MenuRestaurante;
 
-
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -32,7 +31,6 @@ public class GestionMenuUsuario {
     public static void main(String[] args) {
         GestionEmpleado.agregarEmpleadosParaData();
         GestionCliente.agregarClientesParaData();
-
 
         mostrarMenuInicioSesion();
         mostrarMenuPrincipal();
@@ -153,7 +151,7 @@ public class GestionMenuUsuario {
                     System.out.println("Ingrese el email del cliente");
                     String email = scanner.nextLine();
                     int puntos = 0;
-                    Cliente nuevoCliente = new Cliente(dni, nombre, apellido, email, puntos );
+                    Cliente nuevoCliente = new Cliente(dni, nombre, apellido, email, puntos);
                     GestionCliente.agregarCliente(nuevoCliente);
                     break;
                 case 2:
@@ -357,38 +355,9 @@ public class GestionMenuUsuario {
 
                     Venta venta = gestionVentas.crearVenta();
                     int seguir = 1;
-                    int esRegis;
-                    System.out.println("Es para un cliente registrado? (1=Sí / Otro=No): ");
-
-                    try {
-                        esRegis = Integer.parseInt(sc.nextLine().trim());
-                        if (esRegis != 0 && esRegis != 1) {
-                            esRegis = 0;
-                        }
-                    } catch (NumberFormatException e) {
-                            esRegis = 0;
-                    }
-
-                    if (esRegis == 1) {
-                        System.out.print("DNI del cliente: ");
-                        int dniCliente;
-                        try {
-                            dniCliente = Integer.parseInt(sc.nextLine().trim());
-                        } catch (NumberFormatException e) {
-                            System.out.println("DNI inválido.");
-                            dniCliente = -1;
-                        }
-
-                        Cliente cliente = GestionCliente.buscarCliente(dniCliente);
-                        if (cliente != null) {
-
-                            System.out.println("Cliente asociado a la venta.");
-                        } else {
-                            System.out.println("Cliente no encontrado. Continuando sin cliente registrado.");
-                        }
-                    }
-
                     int idProd = 0;
+                    double descuento = 0.0;
+
                     while (seguir == 1){
                         
                         System.out.println(menu);
@@ -439,12 +408,46 @@ public class GestionMenuUsuario {
                             seguir = 0;
                         }
                     }
+                    int esRegis;
+                    System.out.println("Es para un cliente registrado? (1=Sí / Otro=No): ");
+
+                    try {
+                        esRegis = Integer.parseInt(sc.nextLine().trim());
+                        if (esRegis != 0 && esRegis != 1) {
+                            esRegis = 0;
+                        }
+                    } catch (NumberFormatException e) {
+                            esRegis = 0;
+                    }
+
+                    if (esRegis == 1) {
+                        System.out.print("DNI del cliente: ");
+                        int dniCliente;
+                        try {
+                            dniCliente = Integer.parseInt(sc.nextLine().trim());
+                        } catch (NumberFormatException e) {
+                            System.out.println("DNI inválido.");
+                            dniCliente = -1;
+                        }
+
+                        Cliente cliente = GestionCliente.buscarCliente(dniCliente);
+                        if (cliente != null) {
+                            System.out.println("Cliente asociado a la venta.");
+                            descuento = gestionVentas.agregarDescuentoVenta(venta, cliente);
+                            
+                        } else {
+                            System.out.println("Cliente no encontrado. Continuando sin cliente registrado.");
+                        }
+                    }
                     
+
                     if (idProd == 0 ) {
                         break;
                     }else{
                         System.out.println("\nVenta registrada.");
                         System.out.println(venta);
+                        double total = venta.getTotal();
+                        System.out.println(String.format("Total con descuento aplicado (%.2f%%): $%.2f", descuento * 100, total * (1 - descuento)));
                         break;
                     }
                     
