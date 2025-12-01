@@ -1,8 +1,8 @@
-package src.Servicios;
+package com.gestionCafeteria.servicios;
 
-import src.Modelo.DetalleVenta;
-import src.Modelo.Producto;
-import src.Modelo.Venta;
+import com.gestionCafeteria.modelo.DetalleVenta;
+import com.gestionCafeteria.modelo.Producto;
+import com.gestionCafeteria.modelo.Venta;
 
 import java.util.ArrayList;
 import java.util.List;

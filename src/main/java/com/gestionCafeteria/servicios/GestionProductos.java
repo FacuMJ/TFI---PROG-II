@@ -1,6 +1,6 @@
-package src.Servicios;
+package com.gestionCafeteria.servicios;
 
-import src.Modelo.Producto;
+import com.gestionCafeteria.modelo.Producto;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;

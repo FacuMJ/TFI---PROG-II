@@ -9,11 +9,20 @@ package com.gestionCafeteria.servicios;
 //                  Preguntar el nuevo valor
 //              Eliminar
 //              Buscar
-//        Reserva: ...
-//        Producto: ...
+//        Producto: 
+//             Agregar
+//             Modificar
+//             Eliminar
+//             Listar
+//        Venta:
+//             Hacer venta
 
 import com.gestionCafeteria.modelo.Cliente;
 import com.gestionCafeteria.modelo.Empleado;
+import com.gestionCafeteria.modelo.Producto;
+import com.gestionCafeteria.modelo.Venta;
+import com.gestionCafeteria.modelo.MenuRestaurante;
+
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -39,19 +48,17 @@ public class GestionMenuUsuario {
             "Menu Principal de Gestiones\n" +
             "Por favor seleccione una de las siguientes opciones:\n" +
             "\t1. Cliente\n" +
-            "\t2. Reserva\n" +
-            "\t3. Producto\n" +
-            "\t4. Salir\n" +
+            "\t2. Producto\n" +
+            "\t3. Venta\n" +
+            "\t0. Salir\n" +
             "=========================================================\n";
-    private static String textoMenuClientes = "=========================================================\n" +
-            "Menu Principal de Gestion de Cliente\n" +
+    private static String textoMenuClientes = "=========== Gestion de Clientes ===========\n" +
             "Por favor seleccione una de las siguientes opciones:\n" +
             "\t1. Agregar Cliente\n" +
             "\t2. Modificar Cliente\n" +
             "\t3. Eliminar Cliente\n" +
             "\t4. Buscar Cliente\n" +
-            "\t5. Atras\n" +
-            "=========================================================\n";
+            "\t0. Atras\n";
     private static String textoModificarCliente = "\n=== MODIFICAR CLIENTE === \n"+
                                                   "\t¿Que desea modificar?\n"+
                                                   "\t1- Nombre\n"+
@@ -73,7 +80,7 @@ public class GestionMenuUsuario {
             if (inicioCorrecto) {
                 Empleado empleado = GestionEmpleado.buscarEmpleado(legajo);
                 String nombreDelEmpleado = empleado.getNombre();
-                System.out.println(String.format("Bienvenido %s!", nombreDelEmpleado));
+                System.out.println(String.format("Bienvenido/a %s!", nombreDelEmpleado));
             } else {
                 System.out.println("Error: No se pudo iniciar sesión. Legajo o contraseña incorrecta.");
                 mostrarMenuInicioSesion();
@@ -84,7 +91,11 @@ public class GestionMenuUsuario {
             //Recursividad hasta que el legajo sea valido
             scanner.nextLine();
             mostrarMenuInicioSesion();
-        }
+        } catch (NullPointerException e) {
+            System.out.println("Error inesperado al iniciar sesion: " + e.getMessage());
+            scanner.nextLine();
+            mostrarMenuInicioSesion();
+        }   
     }
 
     public static void mostrarMenuPrincipal() {
@@ -98,19 +109,21 @@ public class GestionMenuUsuario {
                     mostrarMenuCliente();
                     break;
                 case 2:
-                    //Menu producto
+                    mostrarMenuProducto();
                     break;
                 case 3:
+                    mostrarMenuVenta();
+                    break;
+                case 0:
                     System.out.println("Hasta luego!");
                     break;
                 default:
-                    System.out.println("Error: Opcion invalida. Por favor ingrese un valor numerico (1, 2, o 3)");
+                    System.out.println("Opcion invalida. Por favor ingrese (1, 2, 3 o 0)");
                     mostrarMenuPrincipal();
             }
 
         } catch (InputMismatchException e) {
-            System.out.println("Error: Opcion invalida. Por favor ingrese un valor numerico (1, 2 o 3");
-            scanner.nextLine();
+            System.out.println("Opcion invalida. Por favor ingrese (1, 2, 3 o 0)");
             mostrarMenuPrincipal();
         }
     }
@@ -183,16 +196,16 @@ public class GestionMenuUsuario {
                     scanner.nextLine();
                     GestionCliente.buscarCliente(dni);
                     break;
-                case 5:
+                case 0:
                     //Atras
                     mostrarMenuPrincipal();
                     break;
                 default:
-                    System.out.println("Error: Opcion invalida. Por favor ingrese un valor numerico (1, 2, 3, 4 o 5)");
+                    System.out.println("Error: Opcion invalida. Por favor ingrese un valor numerico (1, 2, 3, 4 o 0)");
                     mostrarMenuCliente();
             }
-            if (opcion != 5) {
-                //Si la opcion es 5 no quiero esperar ni presionar una tecla para continuar.
+            if (opcion != 0) {
+                //Si la opcion es 0 no quiero esperar ni presionar una tecla para continuar.
                 System.out.println("Presione enter para continuar");
                 scanner.nextLine();
                 mostrarMenuCliente();
@@ -200,9 +213,208 @@ public class GestionMenuUsuario {
 
 
         } catch (InputMismatchException e) {
-            System.out.println("Error: Opcion invalida. Por favor ingrese un valor numerico (1, 2, 3, 4 o 5)");
+            System.out.println("Error: Opcion invalida. Por favor ingrese un valor numerico (1, 2, 3, 4 o 0)");
             scanner.nextLine();
             mostrarMenuCliente();
         }
     }
+    public static void mostrarMenuProducto() {
+        int opcionP = -1;
+        Scanner sc = new Scanner(System.in);
+        GestionProductos gestionProductos = new GestionProductos();
+
+        while (opcionP != 0) {
+            System.out.println("\n=========== Gestion de Productos ===========\n" +
+                "Por favor seleccione una de las siguientes opciones:");
+            System.out.println("\t1. Agregar producto");
+            System.out.println("\t2. Eliminar producto");
+            System.out.println("\t3. Listar productos");
+            System.out.println("\t4. Modificar producto");
+            System.out.println("\t0. Volver al menú principal");
+            System.out.print("Elegir opción: ");
+                        
+            try {
+                opcionP = Integer.parseInt(sc.nextLine().trim());
+            } catch (NumberFormatException e) {
+                System.out.println("Entrada inválida. Ingrese un número.");
+                continue;
+            }
+
+            switch (opcionP) {
+                case 1:
+                    System.out.println("\n--- Agregar producto ---");
+                    try {
+                        System.out.print("ID: ");
+                        int id = Integer.parseInt(sc.nextLine().trim());
+
+                        System.out.print("Nombre: ");
+                        String nombre = sc.nextLine().trim();
+
+                        System.out.print("Precio: ");
+                        double precio = Double.parseDouble(sc.nextLine().trim());
+
+                        System.out.print("Categoría: ");
+                        String categoria = sc.nextLine().trim();
+
+                        Producto nuevo = new Producto(id, nombre, precio, categoria);
+                        boolean agregado = gestionProductos.agregarProducto(nuevo);
+                        if (agregado) {
+                            System.out.println("Producto agregado.");
+                        } else {
+                            System.out.println("No se pudo agregar: ya existe un producto con ese ID.");
+                        }
+
+                    } catch (NumberFormatException e) {
+                        System.out.println("Datos inválidos. Operación cancelada.");
+                    }
+                    break;
+
+                case 2:
+                    System.out.println("\n--- Eliminar producto ---");
+                    try {
+                        System.out.print("ID del producto a eliminar: ");
+                        int idEliminar = Integer.parseInt(sc.nextLine().trim());
+                        gestionProductos.eliminarProducto(idEliminar);
+                    } catch (NumberFormatException e) {
+                        System.out.println("ID inválido. Operación cancelada.");
+                    }
+                                
+                case 3:
+                    System.out.println("\n--- Lista de productos ---");
+                    for (Producto p : gestionProductos.listarProductos()) {
+                        System.out.println(p);
+                        System.out.println("--------------------");
+                    }
+                    break;
+                            
+                case 4:
+                    System.out.println("\n--- Modificar producto ---");
+                    try {
+                        System.out.print("ID del producto a modificar: ");
+                        int idModificar = Integer.parseInt(sc.nextLine().trim());
+
+                        System.out.print("Nuevo nombre: ");
+                        String nuevoNombre = sc.nextLine().trim();
+
+                        System.out.print("Nuevo precio: ");
+                        double nuevoPrecio = Double.parseDouble(sc.nextLine().trim());
+
+                        System.out.print("Nueva categoría: ");
+                        String nuevaCategoria = sc.nextLine().trim();
+
+                        gestionProductos.modificarProducto(idModificar, nuevoNombre, nuevoPrecio, nuevaCategoria);
+                    } catch (NumberFormatException e) {
+                        System.out.println("Datos inválidos. Operación cancelada.");
+                    }
+                    break;
+
+                case 0:
+                    System.out.println("Volviendo al menú principal...");
+                    mostrarMenuPrincipal();
+                    break;
+
+                default:
+                    System.out.println("Opción incorrecta.");
+            }
+        } 
+        sc.close();
+    }
+
+    public static void mostrarMenuVenta() {
+        int opcion = -1;
+        Scanner sc = new Scanner(System.in);
+        GestionProductos gestionProductos = new GestionProductos();
+        GestionVentas gestionVentas = new GestionVentas();
+        MenuRestaurante menu = new MenuRestaurante(gestionProductos);
+
+        while (opcion != 0) {
+            System.out.println("=========== MENU VENTA ===========");
+            System.out.println("\t1. Hacer venta");
+            System.out.println("\t2. Lista de ventas");
+            System.out.println("\t0. Volver al menu principal");
+            System.out.print("Seleccione una opción: ");
+            
+            try {
+                opcion = Integer.parseInt(sc.nextLine().trim());
+            } catch (NumberFormatException e) {
+                System.out.println("Entrada inválida. Ingrese un número.");
+                continue;
+            }
+
+            switch (opcion) {
+                case 1:
+                    System.out.println("\n--- Hacer venta ---");
+
+                    Venta venta = gestionVentas.crearVenta();
+                    int seguir = 1;
+
+                    while (seguir == 1){
+                        
+                        System.out.println(menu);
+
+                        System.out.print("ID del producto: ");
+                        int idProd;
+                        try {
+                            idProd = Integer.parseInt(sc.nextLine().trim());
+                        } catch (NumberFormatException e) {
+                            System.out.println("ID inválido.");
+                            continue;
+                        }
+
+                        Producto prod = gestionProductos.buscarProducto(idProd);
+                        if (prod == null) {
+                            System.out.println("Producto no encontrado.");
+                            continue;
+                        }
+
+                        System.out.print("Cantidad: ");
+                        int cant;
+                        try {
+                            cant = Integer.parseInt(sc.nextLine().trim());
+                            if (cant <= 0) {
+                                System.out.println("Cantidad debe ser mayor que 0.");
+                                continue;
+                            }
+                        } catch (NumberFormatException e) {
+                            System.out.println("Cantidad inválida.");
+                            continue;
+                        }
+
+                        gestionVentas.agregarProductoAVenta(venta, prod, cant);
+                        System.out.println("Producto agregado a la venta.");
+
+                        System.out.print("¿Agregar otro? (1=Sí / Otro=No): ");
+                        try {
+                            seguir = Integer.parseInt(sc.nextLine().trim());
+                            if (seguir != 0 && seguir != 1) {
+                                seguir = 0;
+                            }
+                        } catch (NumberFormatException e) {
+                            seguir = 0;
+                        }
+                    }
+
+                    System.out.println("\nVenta registrada.");
+                    System.out.println(venta);
+                    break;
+
+                case 2:
+                    System.out.println("\n--- Lista de ventas ---");
+                    for (Venta v : gestionVentas.listarVentas()) {
+                        System.out.println(v);
+                        System.out.println("------------------------");
+                    }
+                    break;
+                case 0:
+                    System.out.println("Volviendo al menú principal...");  
+                    mostrarMenuPrincipal();
+                    break;
+                default:
+                    System.out.println("Opción incorrecta.");
+            }
+
+        }
+       sc.close();
+    }
+    
 }

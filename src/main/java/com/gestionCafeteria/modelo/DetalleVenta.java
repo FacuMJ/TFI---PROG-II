@@ -1,4 +1,4 @@
-package src.Modelo;
+package com.gestionCafeteria.modelo;
 
 public class DetalleVenta {
 
@@ -20,7 +20,6 @@ public class DetalleVenta {
         return cantidad;
     }
 
-    // calculado dinámicamente para evitar inconsistencias si cambia el precio fuera
     public double getSubtotal() {
         return producto.getPrecio() * cantidad;
     }
