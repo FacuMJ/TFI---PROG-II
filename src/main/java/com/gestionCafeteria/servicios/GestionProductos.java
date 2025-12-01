@@ -3,17 +3,17 @@ package com.gestionCafeteria.servicios;
 import com.gestionCafeteria.modelo.Producto;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class GestionProductos {
 
-    // map mantiene orden de inserción y evita duplicados por id
-    private Map<Integer, Producto> productosById;
+    // TreeMap para mantener los productos ordenados por id
+    private Map<Integer, Producto> productosById = new TreeMap<>();
 
     public GestionProductos() {
-        this.productosById = new LinkedHashMap<>();
+        this.productosById = new TreeMap<>();
         inicializarProductosBase();
     }
 
