@@ -31,6 +31,7 @@ public class GestionMenuUsuario {
 
     public static void main(String[] args) {
         GestionEmpleado.agregarEmpleadosParaData();
+        GestionCliente.agregarClientesParaData();
 
 
         mostrarMenuInicioSesion();
@@ -58,6 +59,7 @@ public class GestionMenuUsuario {
             "\t2. Modificar Cliente\n" +
             "\t3. Eliminar Cliente\n" +
             "\t4. Buscar Cliente\n" +
+            "\t5. Listar Clientes\n"+
             "\t0. Atras\n";
     private static String textoModificarCliente = "\n=== MODIFICAR CLIENTE === \n"+
                                                   "\t¿Que desea modificar?\n"+
@@ -147,7 +149,8 @@ public class GestionMenuUsuario {
                     String apellido = scanner.nextLine();
                     System.out.println("Ingrese el email del cliente");
                     String email = scanner.nextLine();
-                    Cliente nuevoCliente = new Cliente(dni, nombre, apellido, email);
+                    int puntos = 0;
+                    Cliente nuevoCliente = new Cliente(dni, nombre, apellido, email, puntos );
                     GestionCliente.agregarCliente(nuevoCliente);
                     break;
                 case 2:

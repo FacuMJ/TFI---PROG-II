@@ -39,6 +39,19 @@ public class GestionCliente {
         }
     }
 
+    public static void agregarClientesParaData() {
+        Cliente cliente1= new Cliente(43695548, "Iara", "Avila", "iaraavilalopez@gmail.com", 5000);
+        Cliente cliente2= new Cliente(47777777, "Facundo", "Juaregui", "facundojauregui02@gmail.com", 200);
+        Cliente cliente3= new Cliente(41040327, "Leandro","Espindola", "leancapo@gmail.com", 2000);
+        clientesRegistrados.add(cliente1);
+        clientesRegistrados.add(cliente2);
+        clientesRegistrados.add(cliente3);
+
+    }
+
+
+
+
 
     public static void listarClientes() {
         System.out.println("Lista de clientes registrados:");
