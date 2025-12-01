@@ -1,11 +1,8 @@
 package com.gestionCafeteria.servicios;
 
-
 import com.gestionCafeteria.modelo.Cliente;
-import com.gestionCafeteria.modelo.Empleado;
 
 import java.util.ArrayList;
-
 
 /**
  * Se utiliza para manejar la lista de los Clientes. Realizar altas bajas y modificaciones
@@ -40,24 +37,18 @@ public class GestionCliente {
     }
 
     public static void agregarClientesParaData() {
-        Cliente cliente1= new Cliente(43695548, "Iara", "Avila", "iaraavilalopez@gmail.com", 5000);
-        Cliente cliente2= new Cliente(47777777, "Facundo", "Juaregui", "facundojauregui02@gmail.com", 200);
-        Cliente cliente3= new Cliente(41040327, "Leandro","Espindola", "leancapo@gmail.com", 2000);
+        Cliente cliente1= new Cliente(43695548, "Iara", "Avila", "iaraavilalopez@gmail.com", 1500);
+        Cliente cliente2= new Cliente(47777777, "Facundo", "Jáuregui", "facundojauregui02@gmail.com", 500);
+        Cliente cliente3= new Cliente(41040327, "Leandro","Espindola", "leancapo@gmail.com", 450);
         clientesRegistrados.add(cliente1);
         clientesRegistrados.add(cliente2);
         clientesRegistrados.add(cliente3);
-
     }
-
-
-
-
 
     public static void listarClientes() {
         System.out.println("Lista de clientes registrados:");
         clientesRegistrados.stream().forEach(System.out::println);
     }
-
         //Busco cliente
         //Lo muestro
         //Pregunto que atributo quiere modificar
@@ -84,7 +75,3 @@ public class GestionCliente {
             }
         }
     }
-
-
-
-
