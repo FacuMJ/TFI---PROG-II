@@ -196,12 +196,15 @@ public class GestionMenuUsuario {
                     scanner.nextLine();
                     GestionCliente.buscarCliente(dni);
                     break;
+                case 5: // Listar
+                    System.out.println("== Lista de Clientes ==");
+                    GestionCliente.listarClientes();
                 case 0:
                     //Atras
                     mostrarMenuPrincipal();
                     break;
                 default:
-                    System.out.println("Error: Opcion invalida. Por favor ingrese un valor numerico (1, 2, 3, 4 o 0)");
+                    System.out.println("Error: Opcion invalida. Por favor ingrese un valor numerico (1, 2, 3, 4, 5 o 0)");
                     mostrarMenuCliente();
             }
             if (opcion != 0) {
