@@ -6,7 +6,7 @@ public class Cliente extends Persona {
 
     public Cliente(int dni, String nombre, String apellido, String email, int puntos) {
         super(dni, nombre, apellido, email);
-        this.puntos = 0; // Cuando se crea un cliente, empieza con 0 puntos.
+        this.puntos = puntos;
     }
 
     public int getPuntos() {
