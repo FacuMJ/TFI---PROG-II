@@ -2,6 +2,7 @@ package com.gestionCafeteria.servicios;
 
 
 import com.gestionCafeteria.modelo.Cliente;
+import com.gestionCafeteria.modelo.Empleado;
 
 import java.util.ArrayList;
 
@@ -11,6 +12,7 @@ import java.util.ArrayList;
  *
  * */
 public class GestionCliente {
+
     private static ArrayList<Cliente> clientesRegistrados = new ArrayList<>();
 
     public static void agregarCliente(Cliente nuevoCliente) {
@@ -37,10 +39,12 @@ public class GestionCliente {
         }
     }
 
+
     public static void listarClientes() {
         System.out.println("Lista de clientes registrados:");
         clientesRegistrados.stream().forEach(System.out::println);
     }
+
         //Busco cliente
         //Lo muestro
         //Pregunto que atributo quiere modificar
