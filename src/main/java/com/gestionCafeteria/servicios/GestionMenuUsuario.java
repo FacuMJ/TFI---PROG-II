@@ -42,31 +42,34 @@ public class GestionMenuUsuario {
     private static Scanner scanner = new Scanner(System.in);
 
     private static String textoInicioSesion = "=========================================================\n" +
-            "Bievenido al software de Gestion de Cafeteria!\n" +
-            "Por favor ingrese su legajo:\n" +
-            "=========================================================\n";
+        "Bievenido al software de Gestion de Cafeteria!\n" +
+        "Por favor ingrese su legajo:\n" +
+        "=========================================================\n";
+            
     private static String textoMenuPrincipal = "=========================================================\n" +
-            "Menu Principal de Gestiones\n" +
-            "Por favor seleccione una de las siguientes opciones:\n" +
-            "\t1. Cliente\n" +
-            "\t2. Producto\n" +
-            "\t3. Venta\n" +
-            "\t0. Salir\n" +
-            "=========================================================\n";
-    private static String textoMenuClientes = "=========== Gestion de Clientes ===========\n" +
-            "Por favor seleccione una de las siguientes opciones:\n" +
-            "\t1. Agregar Cliente\n" +
-            "\t2. Modificar Cliente\n" +
-            "\t3. Eliminar Cliente\n" +
-            "\t4. Buscar Cliente\n" +
-            "\t5. Listar Clientes\n"+
-            "\t0. Atras\n";
+        "Menu Principal de Gestiones\n" +
+        "Por favor seleccione una de las siguientes opciones:\n" +
+        "\t1. Cliente\n" +
+        "\t2. Producto\n" +
+        "\t3. Venta\n" +
+        "\t0. Salir\n" +
+        "=========================================================\n";
+
+    private static String textoMenuClientes = "=========== Gestion de Clientes ===========\n" + 
+        "Por favor seleccione una de las siguientes opciones:\n" +
+        "\t1. Agregar Cliente\n" +
+        "\t2. Modificar Cliente\n" +
+        "\t3. Eliminar Cliente\n" +
+        "\t4. Buscar Cliente\n" +
+        "\t5. Listar Clientes\n" +
+        "\t0. Atras\n";
+        
     private static String textoModificarCliente = "\n=== MODIFICAR CLIENTE === \n"+
-                                                  "\t¿Que desea modificar?\n"+
-                                                  "\t1- Nombre\n"+
-                                                  "\t2- Apellido\n"+
-                                                  "\t3- Email\n"+
-                                                  "\t Seleccione una opción (1-3): \n";
+        "\t¿Que desea modificar?\n"+
+        "\t1- Nombre\n"+
+        "\t2- Apellido\n"+
+        "\t3- Email\n"+
+        "\t Seleccione una opción (1-3): \n";
 
     public static void mostrarMenuInicioSesion() {
         System.out.println(textoInicioSesion);
@@ -224,6 +227,7 @@ public class GestionMenuUsuario {
             mostrarMenuCliente();
         }
     }
+
     public static void mostrarMenuProducto() {
         int opcionP = -1;
         Scanner sc = new Scanner(System.in);
@@ -353,18 +357,54 @@ public class GestionMenuUsuario {
 
                     Venta venta = gestionVentas.crearVenta();
                     int seguir = 1;
+                    int esRegis;
+                    System.out.println("Es para un cliente registrado? (1=Sí / Otro=No): ");
 
+                    try {
+                        esRegis = Integer.parseInt(sc.nextLine().trim());
+                        if (esRegis != 0 && esRegis != 1) {
+                            esRegis = 0;
+                        }
+                    } catch (NumberFormatException e) {
+                            esRegis = 0;
+                    }
+
+                    if (esRegis == 1) {
+                        System.out.print("DNI del cliente: ");
+                        int dniCliente;
+                        try {
+                            dniCliente = Integer.parseInt(sc.nextLine().trim());
+                        } catch (NumberFormatException e) {
+                            System.out.println("DNI inválido.");
+                            dniCliente = -1;
+                        }
+
+                        Cliente cliente = GestionCliente.buscarCliente(dniCliente);
+                        if (cliente != null) {
+
+                            System.out.println("Cliente asociado a la venta.");
+                        } else {
+                            System.out.println("Cliente no encontrado. Continuando sin cliente registrado.");
+                        }
+                    }
+
+                    int idProd = 0;
                     while (seguir == 1){
                         
                         System.out.println(menu);
+                        System.out.println("Agregar producto a la venta (ingrese 0 para salir): ");
 
                         System.out.print("ID del producto: ");
-                        int idProd;
+                        
                         try {
                             idProd = Integer.parseInt(sc.nextLine().trim());
                         } catch (NumberFormatException e) {
                             System.out.println("ID inválido.");
                             continue;
+                        }
+
+                        if (idProd == 0) {
+                            break;
                         }
 
                         Producto prod = gestionProductos.buscarProducto(idProd);
@@ -399,11 +439,15 @@ public class GestionMenuUsuario {
                             seguir = 0;
                         }
                     }
-
-                    System.out.println("\nVenta registrada.");
-                    System.out.println(venta);
-                    break;
-
+                    
+                    if (idProd == 0 ) {
+                        break;
+                    }else{
+                        System.out.println("\nVenta registrada.");
+                        System.out.println(venta);
+                        break;
+                    }
+                    
                 case 2:
                     System.out.println("\n--- Lista de ventas ---");
                     for (Venta v : gestionVentas.listarVentas()) {
