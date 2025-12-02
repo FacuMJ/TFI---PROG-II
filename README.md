@@ -36,7 +36,7 @@ Incluye:
 - 5 empleados pre-cargados para pruebas
 - Mensajes de error específicos para credenciales incorrectas
  
-  Gestión de Clientes (CRUD)
+Gestión de Clientes (CRUD)
 - Agregar: Registro con DNI, nombre, apellido, email
 - Modificar: Actualización selectiva de campos individuales
 - Eliminar: Baja por DNI con confirmación automática
