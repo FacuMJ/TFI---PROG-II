@@ -1,5 +1,5 @@
 # TFI---PROG-II
-Este es el trabajo final integrador de Programación II
+Este es el trabajo final integrador de Programación II. Grupo N°2. Comision 1
 
 # Sistema de Gestión de Cafetería
 
