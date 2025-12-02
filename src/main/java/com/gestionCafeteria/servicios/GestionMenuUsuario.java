@@ -29,15 +29,6 @@ import java.util.Scanner;
 
 public class GestionMenuUsuario {
 
-    public static void main(String[] args) {
-        GestionEmpleado.agregarEmpleadosParaData();
-        GestionCliente.agregarClientesParaData();
-
-        mostrarMenuInicioSesion();
-        mostrarMenuPrincipal();
-
-    }
-
     private static Scanner scanner = new Scanner(System.in);
 
     private static String textoInicioSesion = "=========================================================\n" +
@@ -68,7 +59,7 @@ public class GestionMenuUsuario {
         "\t1- Nombre\n"+
         "\t2- Apellido\n"+
         "\t3- Email\n"+
-        "\t Seleccione una opción (1-3): \n";
+        "Seleccione una opción (1-3): \n";
 
     public static void mostrarMenuInicioSesion() {
         System.out.println(textoInicioSesion);
@@ -436,11 +427,15 @@ public class GestionMenuUsuario {
                             System.out.println("DNI inválido.");
                             dniCliente = -1;
                         }
-
                         Cliente cliente = GestionCliente.buscarCliente(dniCliente);
+
                         if (cliente != null) {
                             System.out.println("Cliente asociado a la venta.");
                             descuento = gestionVentas.agregarDescuentoVenta(venta, cliente);
+                            int puntos = cliente.getPuntos() + 20;
+                            cliente.setPuntos(puntos);
+                            System.out.println("============================" + 
+                                "\n +20 puntos agregados al cliente: " + cliente);
                             
                         } else {
                             System.out.println("Cliente no encontrado. Continuando sin cliente registrado.");
@@ -451,8 +446,8 @@ public class GestionMenuUsuario {
                     System.out.println(venta);
                     double total = venta.getTotal();
                     System.out.println(String.format("Total con descuento aplicado (%.2f%%): $%.2f", descuento * 100, total * (1 - descuento)));
-                    
 
+                    break;
                 case 2:
                     System.out.println("\n--- Lista de ventas ---");
                     for (Venta v : gestionVentas.listarVentas()) {
