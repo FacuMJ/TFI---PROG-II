@@ -21,6 +21,7 @@ public class GestionCliente {
         for (Cliente cliente : clientesRegistrados) {
             if (cliente.getDni() == dniCliente) {
                 System.out.println(String.format("Cliente con DNI: %d encontrado!", dniCliente));
+                System.out.println(cliente);
                 return cliente;
             }
         }
