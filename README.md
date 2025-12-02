@@ -129,7 +129,7 @@ Proceso de venta:
 - Confirmación de venta con descuento aplicado
 
 ## Estructuras de Datos Implementadas
-- Colecciones Utilizadas
+- Colecciones 
 - ArrayList<Cliente> - Lista de clientes registrados
 - ArrayList<Empleado> - Lista de empleados del sistema
 - TreeMap<int, Producto> - Productos ordenados por ID
