@@ -201,6 +201,7 @@ public class GestionMenuUsuario {
                 case 5: // Listar
                     System.out.println("== Lista de Clientes ==");
                     GestionCliente.listarClientes();
+                    break;
                 case 0:
                     //Atras
                     mostrarMenuPrincipal();
@@ -267,7 +268,7 @@ public class GestionMenuUsuario {
                         if (agregado) {
                             System.out.println("Producto agregado.");
                         } else {
-                            System.out.println("No se pudo agregar el producto: ya existente o valore (0/negativo).");
+                            System.out.println("No se pudo agregar el producto: ya existente o valor (0/negativo).");
                         }
 
                     } catch (NumberFormatException e) {
