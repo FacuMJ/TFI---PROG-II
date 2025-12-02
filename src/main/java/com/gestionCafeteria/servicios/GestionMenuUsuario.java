@@ -59,6 +59,7 @@ public class GestionMenuUsuario {
         "\t1- Nombre\n"+
         "\t2- Apellido\n"+
         "\t3- Email\n"+
+        "\t0- Volver al menu Cliente\n" +
         "Seleccione una opción (1-3): \n";
 
     public static void mostrarMenuInicioSesion() {
@@ -156,7 +157,7 @@ public class GestionMenuUsuario {
                     System.out.println(textoModificarCliente);
                     int opcionModificar = scanner.nextInt();
                     scanner.nextLine();
-                    String nuevoValor;
+                    String nuevoValor = "";
                     switch (opcionModificar) {
                         case 1:
                             System.out.print("Ingrese nuevo nombre: ");
@@ -170,9 +171,14 @@ public class GestionMenuUsuario {
                             System.out.print("Ingrese nuevo email: ");
                             nuevoValor = scanner.nextLine();
                             break;
+                        case 0:
+                            break;
                         default:
                             System.out.println("ERROR: Opción inválida, por favor, elija una opcion entre 1 a 3");
                             return;
+                    }
+                    if (opcionModificar == 0) {
+                        break;
                     }
                     GestionCliente.modificarCliente(dni,opcionModificar,nuevoValor);
                     clienteAModificar =  GestionCliente.buscarCliente(dni);
