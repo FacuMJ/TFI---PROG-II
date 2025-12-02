@@ -38,7 +38,7 @@ public class GestionCliente {
 
     public static void agregarClientesParaData() {
         Cliente cliente1= new Cliente(43695548, "Iara", "Avila", "iaraavilalopez@gmail.com", 1500);
-        Cliente cliente2= new Cliente(47777777, "Facundo", "Jáuregui", "facundojauregui02@gmail.com", 500);
+        Cliente cliente2= new Cliente(48132534, "Facundo", "Jáuregui", "facundojauregui02@gmail.com", 500);
         Cliente cliente3= new Cliente(41040327, "Leandro","Espindola", "leancapo@gmail.com", 450);
         clientesRegistrados.add(cliente1);
         clientesRegistrados.add(cliente2);

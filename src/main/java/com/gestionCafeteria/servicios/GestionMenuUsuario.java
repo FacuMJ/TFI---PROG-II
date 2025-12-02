@@ -16,6 +16,7 @@ package com.gestionCafeteria.servicios;
 //             Listar
 //        Venta:
 //             Hacer venta
+//             Listar ventas
 
 import com.gestionCafeteria.modelo.Cliente;
 import com.gestionCafeteria.modelo.Empleado;
@@ -269,7 +270,7 @@ public class GestionMenuUsuario {
                         if (agregado) {
                             System.out.println("Producto agregado.");
                         } else {
-                            System.out.println("No se pudo agregar: ya existe un producto con ese ID.");
+                            System.out.println("No se pudo agregar el producto: ya existente o valore (0/negativo).");
                         }
 
                     } catch (NumberFormatException e) {
@@ -361,8 +362,7 @@ public class GestionMenuUsuario {
                     while (seguir == 1){
                         
                         System.out.println(menu);
-                        System.out.println("Agregar producto a la venta (ingrese 0 para salir): ");
-
+                        System.out.println("Agregar producto a la venta (ingrese 0 para cancelar): ");
                         System.out.print("ID del producto: ");
                         
                         try {
@@ -373,6 +373,7 @@ public class GestionMenuUsuario {
                         }
 
                         if (idProd == 0) {
+                            venta = gestionVentas.eliminarVenta();
                             break;
                         }
 
@@ -409,6 +410,12 @@ public class GestionMenuUsuario {
                         }
                     }
                     int esRegis;
+                    
+                    
+
+                    if (idProd == 0 ) {
+                        break;
+                    }else
                     System.out.println("Es para un cliente registrado? (1=Sí / Otro=No): ");
 
                     try {
@@ -439,18 +446,13 @@ public class GestionMenuUsuario {
                             System.out.println("Cliente no encontrado. Continuando sin cliente registrado.");
                         }
                     }
+
+                    System.out.println("\nVenta registrada.");
+                    System.out.println(venta);
+                    double total = venta.getTotal();
+                    System.out.println(String.format("Total con descuento aplicado (%.2f%%): $%.2f", descuento * 100, total * (1 - descuento)));
                     
 
-                    if (idProd == 0 ) {
-                        break;
-                    }else{
-                        System.out.println("\nVenta registrada.");
-                        System.out.println(venta);
-                        double total = venta.getTotal();
-                        System.out.println(String.format("Total con descuento aplicado (%.2f%%): $%.2f", descuento * 100, total * (1 - descuento)));
-                        break;
-                    }
-                    
                 case 2:
                     System.out.println("\n--- Lista de ventas ---");
                     for (Venta v : gestionVentas.listarVentas()) {

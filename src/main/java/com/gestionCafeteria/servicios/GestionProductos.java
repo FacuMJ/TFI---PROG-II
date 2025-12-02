@@ -29,6 +29,7 @@ public class GestionProductos {
     // devuelve true si se agregó, false si ya existía un producto con ese id
     public boolean agregarProducto(Producto p) {
         if (p == null) return false;
+        if (p.getId() <= 0) return false;
         if (productosById.containsKey(p.getId())) return false;
         productosById.put(p.getId(), p);
         return true;
