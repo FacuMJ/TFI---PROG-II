@@ -24,6 +24,13 @@ public class GestionVentas {
         return v;
     }
 
+    public Venta eliminarVenta() {
+        if (ventas.isEmpty()) {
+            return null;
+        }
+        return ventas.remove(ventas.size() - 1);
+    }
+
     public void agregarProductoAVenta(Venta venta, Producto p, int cantidad) {
         if (venta == null || p == null) {
             throw new IllegalArgumentException("venta o producto nulos");
