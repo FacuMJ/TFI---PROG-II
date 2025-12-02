@@ -188,8 +188,8 @@ Mantenibilidad
 
 
 ## Autores:
-Avila López, Iara Camila
-Jáuregui, Facundo Manuel
+- Avila López, Iara Camila
+- Jáuregui, Facundo Manuel
 
 ## Licencia
 Proyecto académico desarrollado para UTN FRRE - Curso Programación 2 - Comisión 1- Año 2025
