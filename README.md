@@ -132,7 +132,7 @@ Proceso de venta:
 - Colecciones 
 - ArrayList<Cliente> - Lista de clientes registrados
 - ArrayList<Empleado> - Lista de empleados del sistema
-- TreeMap<int, Producto> - Productos ordenados por ID
+- TreeMap<Integer, Producto> - Productos ordenados por ID
 - ArrayList<Venta> - Historial de ventas realizadas
 - Sistema de puntos- Atributo en Cliente con lógica de descuentos
 
