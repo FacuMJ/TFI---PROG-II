@@ -120,6 +120,7 @@ Main.java
 ## Flujo de Uso con Descuentos
 - Inicio de sesión con credenciales de empleado
 - Menú principal (Cliente / Producto / Venta)
+
 Proceso de venta:
 - Selección de productos
 - Verificación automática de puntos del cliente
